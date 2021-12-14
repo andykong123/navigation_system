@@ -61,11 +61,11 @@ class _MyHomePageState extends State<MyHomePage> {
   String commands = '';
 
   initCamera() async {
-    cameraController = CameraController(cameras[0], ResolutionPreset.medium);
+    cameraController = CameraController(cameras[cameraIndex], ResolutionPreset.medium);
     await cameraController!.initialize();
     if (mounted) {
       setState(() {
-        cameraController!.startImageStream(_processCameraImage);
+        cameraController!.startImageStream(processCameraImage);
       });
     }
   }
@@ -74,6 +74,7 @@ class _MyHomePageState extends State<MyHomePage> {
     speechEnabled = await sTT.initialize();
     var locales = await sTT.locales();
     for (var locale in locales) {
+      // selecting English locale since the default locale on the tested device is Korean
       if(locale.name == '영어 (세계)') {
         engLocaleID = locale.localeId;
         break;
@@ -129,7 +130,7 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
-  Future _processCameraImage(CameraImage image) async {
+  Future<void> processCameraImage(CameraImage image) async {
     final WriteBuffer allBytes = WriteBuffer();
     for (Plane plane in image.planes) {
       allBytes.putUint8List(plane.bytes);
