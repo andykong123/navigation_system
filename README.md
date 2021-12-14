@@ -1,6 +1,6 @@
 # navigation_system
 
-LWW 2102 FYP
+LWW 2102 FYP: Design a navigation system with natural language command as a guide
 
 ## Getting Started
 
