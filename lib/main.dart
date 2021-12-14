@@ -149,7 +149,7 @@ class _MyHomePageState extends State<MyHomePage> {
             InputImageFormat.YUV420;
 
     final planeData = image.planes.map(
-          (Plane plane) {
+      (Plane plane) {
         return InputImagePlaneMetadata(
           bytesPerRow: plane.bytesPerRow,
           height: plane.height,
